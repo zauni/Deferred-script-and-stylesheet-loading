@@ -82,4 +82,4 @@
         };
     })();
 
-})(this, this.document, this.jQuery);
+})(this, this.jQuery);
