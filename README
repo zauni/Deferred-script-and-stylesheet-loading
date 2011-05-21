@@ -20,3 +20,8 @@ $.when(
 Loader.load("js/foo.js").then(function() {
     console.log("Foo loaded!");
 });
+
+
+Next step:
+Implement the CSS onload/onerror Callbacks, explained in this blog post:
+http://yearofmoo.com/2011/03/cross-browser-stylesheet-preloading/
