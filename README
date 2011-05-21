@@ -1,3 +1,11 @@
+Description:
+
+This is a really simple Loader where you can load scripts and stylesheets.
+The fun part is that the Loader returns Deferred objects which you can use
+to bind the callbacks or let the $.when function do its job.
+
+Required jQuery Version 1.5+
+
 Sample Code:
 
 $.when(
@@ -9,4 +17,6 @@ $.when(
     }
 );
 
-Required jQuery Version 1.5+
+Loader.load("js/foo.js").then(function() {
+    console.log("Foo loaded!");
+});
