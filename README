@@ -1,0 +1,12 @@
+Sample Code:
+
+$.when(
+    Loader.load("js/fancybox.js"),
+    Loader.load("css/fancybox.css")
+).then(
+    function() {
+        console.log("Fancybox loaded!");
+    }
+);
+
+Required jQuery Version 1.5+
