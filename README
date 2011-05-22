@@ -23,5 +23,6 @@ Loader.load("js/foo.js").then(function() {
 
 
 Next step:
-Implement the CSS onload/onerror Callbacks, explained in this blog post:
+Implement real CSS onload/onerror Callbacks, explained in this blog posts:
+http://www.phpied.com/when-is-a-stylesheet-really-loaded/ or
 http://yearofmoo.com/2011/03/cross-browser-stylesheet-preloading/
