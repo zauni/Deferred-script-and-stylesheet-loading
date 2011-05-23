@@ -8,6 +8,10 @@ Required jQuery Version 1.5+
 
 Sample Code:
 
+Loader.load("js/foo.js").then(function() {
+    console.log("Foo loaded!");
+});
+
 $.when(
     Loader.load("js/fancybox.js"),
     Loader.load("css/fancybox.css")
@@ -16,10 +20,6 @@ $.when(
         console.log("Fancybox loaded!");
     }
 );
-
-Loader.load("js/foo.js").then(function() {
-    console.log("Foo loaded!");
-});
 
 
 Next step:
