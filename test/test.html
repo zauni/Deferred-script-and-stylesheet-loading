@@ -19,6 +19,16 @@
         )
         .then(function() {
             alert("okay, everything loaded");
+        },
+        function(msg) {
+            alert(msg);
+        });
+        
+        Loader.load("blub.css").then(function() {
+            alert("okay, blub loaded");
+        },
+        function(msg) {
+            alert(msg);
         });
     </script>
 </body>
