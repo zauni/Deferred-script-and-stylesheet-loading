@@ -1,4 +1,4 @@
-(function(global, $) {
+(function(global, $, undef) {
 
     /**
      * @class Loader
@@ -18,7 +18,7 @@
      */
     global.Loader = (function() {
         var loaded = {},
-            waitingTime = 5000;
+            waitingTime = 3000;
         
         /**
          * Load a stylesheet or a script
@@ -63,7 +63,7 @@
         /**
          * loads a stylesheet into the head
          * @param {String} source
-         * @return {Deferred}
+         * @return {Deferred} returns a "Promise" and not the direct deferred, otherwise it could be manipulated
          */
         function loadStyle(source) {
             var deferred = new $.Deferred(),
@@ -74,38 +74,53 @@
                 }),
                 callback = function() {
                     deferred.resolve();
+                    console.log("resolved!!", deferred.isResolved(), link);
                 };
                 
             link.appendTo("head");
             
             // onload handler for webkit and gecko - both are not supporting the "onload" event on link elements
             // 
-            if($.browser.webkit || $.browser.gecko) {
-                (function poll() {
+            if($.browser.webkit || $.browser.mozilla) {
+                (function poll(link) {
                     setTimeout(function() {
+                        var sheet, rules, ready;
                         try {
-                            if(link.sheet.cssRules.length) {
+                            // IE is using "styleSheet" and "rules" but this browser shouldn't
+                            // come that far so these statements are just for added safety
+                            sheet = link.sheet || link.styleSheet;
+                            rules = sheet.cssRules || sheet.rules;
+                            
+                            ready = rules ? rules.length > 0 : rules !== undef;
+                            
+                            console.log(ready);
+                            
+                            if(ready) {
                                 callback();
                             }
                             else {
-                                poll();
+                                poll(link);
                             }
                         }
                         catch(exc) {
+                            console.log(exc);
                             // If it is a security error than the stylesheet was loaded from a different domain
-                            if((ex.code == 1000) || (ex.message == 'security' || ex.message == 'denied')) {
+                            if((exc.code == 1000) || (exc.message == "security" || exc.message == "denied")) {
                                 callback();
                             }
                             // otherwise, continue to poll
                             else {
-                                poll();
+                                poll(link);
                             }
                         }
-                    }, 10);
-                })();
+                    }, 30);
+                })(link[0]);
             }
             else {
                 link[0].onload = callback;
+                link[0].onerror = function() {
+                    deferred.reject("Could not load '"+source+"'.");
+                };
             }
             
             // don't wait forever that a stylesheet is loaded
@@ -115,7 +130,7 @@
                 }
             }, waitingTime);
             
-            return deferred;
+            return deferred.promise();
         }
         
         /**

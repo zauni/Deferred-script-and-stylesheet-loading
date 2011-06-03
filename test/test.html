@@ -2,34 +2,23 @@
 <html>
 <head>
     <title>Tests</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link rel="stylesheet" href="qunit.css" type="text/css" />
 </head>
 <body>
-    <h1>Tests</h1>
+    <h1 id="qunit-header">Loader Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">
+        <div id="css-available-test"></div>
+    </div>
     
-    <p class="cssloaded">This p tag should have a red background.</p>
-    <a href="#" class="jsloaded">This link should have an onclick-handler.</a>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+    <script src="qunit.js"></script>
     <script src="../source/loader.js"></script>
-    <script>
-        $.when(
-            Loader.load("test.js"),
-            Loader.load("test.css")
-        )
-        .then(function() {
-            alert("okay, everything loaded");
-        },
-        function(msg) {
-            alert(msg);
-        });
-        
-        Loader.load("blub.css").then(function() {
-            alert("okay, blub loaded");
-        },
-        function(msg) {
-            alert(msg);
-        });
-    </script>
+    <script src="tests.js"></script>
 </body>
 </html>
