@@ -37,7 +37,7 @@ $(document).ready(function() {
         ok(!$.isFunction(jsDef.reject), "Deferred cannot be rejected");
     });
     
-    test("Check if Deferred can handle cross domain files", function() {
+    test("Check if Loader can handle cross domain files", function() {
         expect(2);
         stop();
         
@@ -54,7 +54,7 @@ $(document).ready(function() {
         }, 1500);
     });
     
-    test("Check if Deferred can handle false input filetype", function() {
+    test("Check if Loader can handle false input filetype", function() {
         expect(2);
         stop(500);
         falseDef.fail(function(msg) {
