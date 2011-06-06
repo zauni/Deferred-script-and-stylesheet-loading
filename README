@@ -10,19 +10,15 @@ Sample Code:
 
 Loader.load("js/foo.js").then(function() {
     console.log("Foo loaded!");
+}, function() {
+    console.log("Something went wrong!");
 });
 
 $.when(
     Loader.load("js/fancybox.js"),
     Loader.load("css/fancybox.css")
-).then(
+).done(
     function() {
         console.log("Fancybox loaded!");
     }
 );
-
-
-Next step:
-Implement real CSS onload/onerror Callbacks, explained in this blog posts:
-http://www.phpied.com/when-is-a-stylesheet-really-loaded/ or
-http://yearofmoo.com/2011/03/cross-browser-stylesheet-preloading/
