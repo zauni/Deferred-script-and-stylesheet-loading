@@ -64,6 +64,7 @@ $(document).ready(function() {
         });
     });
     
+    // It's possible that one has to clear the cache of the browser!
     test("Check if error timeout is aborting the loading", function() {
         expect(4);
         stop();
